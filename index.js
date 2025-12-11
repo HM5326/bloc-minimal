@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const upload = multer({ dest: 'public/images' })
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const tabPub = [];
 
 
@@ -136,6 +136,6 @@ app.delete("/post/id/delete", (req, res) => {
   res.redirect("/");
 });
 
-app.listen(port, () => {
-  console.log(`Le serveur est ouvert sous le port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Le serveur est ouvert sous le port ${PORT}`);
 });
