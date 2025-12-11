@@ -1,0 +1,60 @@
+<% let html = `
+  <h1>Publications</h1>
+`;
+if (tab.length === 0) {
+  html += `
+    <div class="col-12 mt-3 mb-2 border">
+      <p class="text-center m-0 py-5">Aucune publication pour l'instant. Créez en cliquant sur le bouton 'Nouvelle Publication'.</p>
+  `;
+} else {
+  html += `
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
+  `;
+  tab.slice().reverse().forEach((item) => {
+    if (item.contenu.length < 120) {
+      html += `
+        <div class="col" id="${item.id}">
+          <div class="card">
+            <img src="images/${item.image}" class="card-img-top" alt="image de couverture">
+            <div class="card-body">
+              <h2 class="card-title">${item.title}</h2>
+              <p class="card-text"><small class="text-body-secondary">Par ${item.auteur} --- Créé le ${item.dateCreation}</small></p>
+              <p class="card-text contenu">${item.contenu}</p>
+              <div class="d-flex gap-2">
+                <a href="/post/id?id=${item.id}" class="btn btn-outline-primary">Voir</a>
+                <a href="/post/id/edit?id=${item.id}" class="btn btn-outline-secondary">Modifier</a>
+                <form action="/post/id/delete?id=${item.id}&&_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-outline-danger confirmDelete">Supprimer</button>
+                </form>
+              </div> 
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="col" id="${item.id}">
+          <div class="card">
+            <img src="images/${item.image}" class="card-img-top" alt="image de couverture">
+            <div class="card-body">
+              <h2 class="card-title">${item.title}</h2>
+              <p class="card-text"><small class="text-body-secondary">Par ${item.auteur} --- Créé le ${item.dateCreation}</small></p>
+              <p class="card-text contenu">${item.contenu.slice(0, 120)} ...</p>
+              <div class="d-flex gap-2">
+                <a href="/post/id?id=${item.id}" class="btn btn-outline-primary">Voir</a>
+                <a href="/post/id/edit?id=${item.id}" class="btn btn-outline-secondary">Modifier</a>
+                <form action="/post/id/delete?id=${item.id}&&_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-outline-danger confirmDelete">Supprimer</button>
+                </form>
+              </div> 
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  });
+} %>
+
+<% html += `</div>` %>
+
+<%- include('layout.ejs', {body: html}) %>

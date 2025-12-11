@@ -1,0 +1,27 @@
+<% let html = `
+<h1>Modifier la Publication</h1>
+<form class="row g-3 mt-3" action="/post/id/edit?id=${id}&&_method=PUT" enctype="multipart/form-data" method="POST">
+  <div class="col-md-6">
+    <label for="inputTitre" class="form-label">Titre</label>
+    <input type="text" class="form-control" id="inputTitre" value="${title}" name="titrePub" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputAuteur" class="form-label">Auteur</label>
+    <input type="text" class="form-control" id="inputAuteur" value="${auteur}" name="auteurPub">
+  </div>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Default file input example</label>
+    <input class="form-control" type="file" id="formFile" name="formFile">
+  </div>
+  <div class="mb-3">
+    <label for="contenuTextarea1" class="form-label">Contenu de la Publication</label>
+    <textarea class="form-control" id="contenuTextarea1" rows="6" placeholder="Rediger votre publication ici" name="contenuPub" required>${contenu}</textarea>
+  </div>
+  <div class="col-12 d-flex gap-3">
+    <a class="btn btn-secondary" href="/post/id?id=${id}">Retour</a>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+` %>
+
+<%- include('layout.ejs', {body: html}) %>

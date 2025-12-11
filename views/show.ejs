@@ -1,0 +1,23 @@
+<% let html = `
+  <div class="mb-3">
+    <a class="text-muted" href="/">&larr; Retour</a>
+  </div>
+  <div class="mb-4">
+    <img src="/images/${image}" class="card-img-top" alt="image de couverture">
+    <h1>${title}</h1>
+    <div class="text-muted small">par ${auteur} — Le ${dateCreation}</div>
+    ${dateModif ? `<div class="text-muted small">Modifié : ${dateModif}</div>` : ''}
+  </div>
+  <div class="mb-4">
+    <p>${contenu.replace(/\n/g, '<br>')}</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="/post/id/edit/?id=${id}">Modifier</a>
+    <form method="POST" action="/post/id/delete/?id=${id}&&_method=DELETE" class="confirm-delete-form d-inline-block">
+      <button class="btn btn-outline-danger confirmDelete" type="submit">Supprimer</button>
+    </form>
+    <a class="btn btn-light" href="/">Toutes les publications</a>
+  </div>
+`; %>
+
+<%- include('layout.ejs', {body: html}) %>
